@@ -1,4 +1,4 @@
-package com.example.demo.board.controller;
+package com.learn.forwiz.board.controller;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.board.service.TestService;
-import com.example.demo.board.vo.TestVO;
+import com.learn.forwiz.board.service.TestService;
+import com.learn.forwiz.board.vo.TestVO;
 
 @RestController
 @RequestMapping("/api")

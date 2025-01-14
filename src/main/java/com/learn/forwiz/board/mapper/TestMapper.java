@@ -1,10 +1,10 @@
-package com.example.demo.board.mapper;
+package com.learn.forwiz.board.mapper;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.example.demo.board.vo.TestVO;
+import com.learn.forwiz.board.vo.TestVO;
 
 @Mapper
 public interface TestMapper {

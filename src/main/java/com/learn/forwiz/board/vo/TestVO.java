@@ -1,4 +1,4 @@
-package com.example.demo.board.vo;
+package com.learn.forwiz.board.vo;
 
 import lombok.Data;
 
