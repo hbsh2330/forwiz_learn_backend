@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.learn.forwiz.lecture.mapper.LectureMapper">
+
+	<select id="selectLectureList" resultType="com.learn.forwiz.lecture.vo.LectureVO">
+        SELECT *
+          FROM TB_LECTURE
+	</select>
+	
+	<select id="selectLectureDetail" parameterType="String" resultType="com.learn.forwiz.lecture.vo.LectureVO">
+	    SELECT *
+          FROM TB_LECTURE               A
+         INNER JOIN TB_LECTURE_CATEGORY B
+            ON A.CATEGORY_ID = B.CATEGORY_ID
+	     WHERE LECTURE_ID = #{lectureId}
+	</select>
+
+</mapper>
