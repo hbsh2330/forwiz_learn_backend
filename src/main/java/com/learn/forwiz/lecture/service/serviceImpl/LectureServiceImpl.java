@@ -21,8 +21,8 @@ public class LectureServiceImpl implements LectureService {
 	}
 
 	@Override
-	public LectureVO selectLectureDetail(String lectureId) {
-		return lectureMapper.selectLectureDetail(lectureId);
+	public LectureVO selectLectureDetail(String lectureNo) {
+		return lectureMapper.selectLectureDetail(lectureNo);
 	}
 
 }

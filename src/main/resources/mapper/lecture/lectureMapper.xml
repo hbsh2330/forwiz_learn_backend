@@ -9,10 +9,8 @@
 	
 	<select id="selectLectureDetail" parameterType="String" resultType="com.learn.forwiz.lecture.vo.LectureVO">
 	    SELECT *
-          FROM TB_LECTURE               A
-         INNER JOIN TB_LECTURE_CATEGORY B
-            ON A.CATEGORY_ID = B.CATEGORY_ID
-	     WHERE LECTURE_ID = #{lectureId}
+          FROM TB_LECTURE
+	     WHERE LECTURE_NO = #{lectureNo}::NUMERIC
 	</select>
 
 </mapper>

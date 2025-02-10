@@ -23,7 +23,7 @@ public class LectureController {
 	}
 	
 	@GetMapping("/selectLectureDetail.do")
-	LectureVO selectLectureDetail(String lectureId) {
-		return lectureService.selectLectureDetail(lectureId);
+	LectureVO selectLectureDetail(String lectureNo) {
+		return lectureService.selectLectureDetail(lectureNo);
 	}
 }

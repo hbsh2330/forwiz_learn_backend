@@ -4,21 +4,19 @@ import lombok.Data;
 
 @Data
 public class LectureVO {
-	String lectureId;
-	String categoryId;
-	String categoryNm;
+	String lectureNo;
 	String lectureNm;
+	String categoryCd;
 	String price;
-	String discountRate;
-	String createdDt;
-	String updatedDt;
-	String deletedDt;
 	String detailInfo;
 	String thumbnailImage;
 	String difficulty;
 	String totalCnt;
 	String totalTime;
-	String diplomaYn;
 	String openYn;
 	String deleteYn;
+	String createdDt;
+	String createdUser;
+	String updatedDt;
+	String updatedUser;
 }

@@ -9,5 +9,5 @@ import com.learn.forwiz.lecture.vo.LectureVO;
 @Mapper
 public interface LectureMapper {
 	List<LectureVO> selectLectureList();
-	LectureVO selectLectureDetail(String lectureId);
+	LectureVO selectLectureDetail(String lectureNo);
 }

@@ -6,5 +6,5 @@ import com.learn.forwiz.lecture.vo.LectureVO;
 
 public interface LectureService {
 	List<LectureVO> selectLectureList();
-	LectureVO selectLectureDetail(String lectureId);
+	LectureVO selectLectureDetail(String lectureNo);
 }
