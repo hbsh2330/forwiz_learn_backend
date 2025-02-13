@@ -18,8 +18,8 @@ public class LectureController {
 	LectureService lectureService;
 	
 	@GetMapping("/selectLectureList.do")
-	List<LectureVO> selectLectureList() {
-		return lectureService.selectLectureList();
+	List<LectureVO> selectLectureList(LectureVO lectureVO) {
+		return lectureService.selectLectureList(lectureVO);
 	}
 	
 	@GetMapping("/selectLectureDetail.do")

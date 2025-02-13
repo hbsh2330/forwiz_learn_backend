@@ -19,4 +19,6 @@ public class LectureVO {
 	String createdUser;
 	String updatedDt;
 	String updatedUser;
+	
+	String totalRecordCnt;
 }

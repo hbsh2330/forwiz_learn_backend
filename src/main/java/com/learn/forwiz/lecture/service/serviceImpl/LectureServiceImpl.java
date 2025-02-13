@@ -16,8 +16,8 @@ public class LectureServiceImpl implements LectureService {
 	LectureMapper lectureMapper;
 	
 	@Override
-	public List<LectureVO> selectLectureList() {
-		return lectureMapper.selectLectureList();
+	public List<LectureVO> selectLectureList(LectureVO lectureVO) {
+		return lectureMapper.selectLectureList(lectureVO);
 	}
 
 	@Override

@@ -8,6 +8,6 @@ import com.learn.forwiz.lecture.vo.LectureVO;
 
 @Mapper
 public interface LectureMapper {
-	List<LectureVO> selectLectureList();
+	List<LectureVO> selectLectureList(LectureVO lectureVO);
 	LectureVO selectLectureDetail(String lectureNo);
 }
