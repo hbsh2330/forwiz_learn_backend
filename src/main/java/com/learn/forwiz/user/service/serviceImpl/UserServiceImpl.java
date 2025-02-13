@@ -1,4 +1,4 @@
-package com.learn.forwiz.user.serviceImpl;
+package com.learn.forwiz.user.service.serviceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
