@@ -21,4 +21,9 @@ public class LectureVO {
 	String updatedUser;
 	
 	String totalRecordCnt;
+	
+	// 검색 파라미터
+	String[] difficultyArray;
+	int minPrice;
+	int maxPrice;
 }

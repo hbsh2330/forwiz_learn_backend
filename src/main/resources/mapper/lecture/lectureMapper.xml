@@ -10,6 +10,18 @@
     	<if test="lectureNm != null and lectureNm != ''">    	
            AND LOWER(LECTURE_NM) LIKE '%'||LOWER(#{lectureNm})||'%'
     	</if>
+    	<if test="difficultyArray != null and difficultyArray.length != 0">
+    	   AND difficulty IN
+    		<foreach item="item" collection="difficultyArray" open="(" separator="," close=")">
+    		   #{item}
+    		</foreach>
+    	</if>
+    	<if test="minPrice != null and minPrice != ''">
+    	   AND price <![CDATA[>=]]> #{minPrice}::NUMERIC
+    	</if>
+    	<if test="maxPrice != null and maxPrice != ''">
+    	   AND price <![CDATA[<=]]> #{maxPrice}::NUMERIC
+    	</if>  	
 	</select>
 	
 	<select id="selectLectureDetail" parameterType="String" resultType="com.learn.forwiz.lecture.vo.LectureVO">
