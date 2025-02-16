@@ -20,10 +20,15 @@ public class LectureVO {
 	String updatedDt;
 	String updatedUser;
 	
-	String totalRecordCnt;
+	// 페이징
+	int totalRecordCnt;
+	int page;
+	int pageCnt = 5;
+	int recordCnt = 12;
 	
 	// 검색 파라미터
 	String[] difficultyArray;
 	int minPrice;
 	int maxPrice;
+	String orderBy;
 }
