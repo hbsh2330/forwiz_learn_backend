@@ -5,7 +5,7 @@ spring:
   main:
     allow-bean-definition-overriding: true
   datasource:
-    url: jdbc:postgresql://192.168.100.102:5432/forwiz_learn_db
+    url: jdbc:postgresql://192.168.100.96:5432/forwiz_learn_db
     username: myuser
     password: 1234
     driver-class-name: org.postgresql.Driver
