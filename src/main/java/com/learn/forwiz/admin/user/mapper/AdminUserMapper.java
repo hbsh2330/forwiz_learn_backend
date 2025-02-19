@@ -5,8 +5,14 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.learn.forwiz.admin.user.vo.AdminUserVO;
+
 
 @Mapper
 public interface AdminUserMapper {
-	List<Map<String, Object>> selectUserList();
+	List<AdminUserVO> selectUserList(AdminUserVO vo);
+
+	void updateUserRole(Map<String, Object> paramMap);
+
+	List<AdminUserVO> selectUserDetail(Long userNo);
 }

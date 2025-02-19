@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.learn.forwiz.admin.user.mapper.AdminUserMapper">
+	<select id="selectUserList" resultType="com.learn.forwiz.admin.user.vo.AdminUserVO">
+		/*selectUserList*/
+		SELECT A.USER_NO								AS USER_NO,
+			   A.USER_NM								AS USER_NM,
+		       A.EMAIL									AS EMAIL,
+		       A.CONTACT								AS CONTACT,
+	           TO_CHAR(A.REGIST_DT, 'YYYY-MM-DD')		AS REGIST_DT,
+		       B.ROLE_NO								AS ROLE_NO,
+		       C.ROLE_NAME								AS ROLE_NAME,
+		       D.TOTAL_PRICE    						AS TOTAL_PRICE,
+		       COUNT(E.ORDER_PRICE)						AS LECTURE_PURCHASE_AMOUNT
+		FROM   TB_USER A
+		       JOIN TB_USER_ROLE_MAP B
+		         ON A.USER_NO = B.USER_NO
+		       JOIN TB_USER_ROLE C
+		         ON B.ROLE_NO = C.ROLE_NO
+		  LEFT JOIN TB_ORDER D
+		         ON D.USER_NO = A.USER_NO
+		  LEFT JOIN TB_ORDER_DETAIL E
+		         ON E.USER_NO = D.USER_NO
+		WHERE 1=1
+    <!-- 검색 조건 적용 -->
+    <if test="searchCriteria == 'name' and searchTerm != null and searchTerm != ''">
+      AND A.USER_NM LIKE CONCAT('%', #{searchTerm}, '%')
+    </if>
+    <if test="searchCriteria == 'email' and searchTerm != null and searchTerm != ''">
+      AND A.EMAIL LIKE CONCAT('%', #{searchTerm}, '%')
+    </if>
+    <if test="searchCriteria == 'phone' and searchTerm != null and searchTerm != ''">
+      AND A.CONTACT LIKE '%'|| LOWER(#{searchTerm})|| '%'
+    </if>
+
+    <!-- 날짜 검색 조건 -->
+	<if test="startDate != null">
+    	AND A.REGIST_DT <![CDATA[>]]> #{startDate}
+	</if>
+	<if test="endDate != null">
+    	AND A.REGIST_DT <![CDATA[<]]> #{endDate}
+	</if>
+	GROUP BY A.USER_NO, A.USER_NM, A.EMAIL, A.CONTACT, A.REGIST_DT, B.ROLE_NO, C.ROLE_NAME, D.TOTAL_PRICE;
+	</select>
+	<update id="updateUserRole">
+ 		<choose>
+    		<when test="type == 'admin'">
+      			UPDATE TB_USER_ROLE_MAP
+      			SET ROLE_NO = 2
+      			WHERE USER_NO = #{userNo}::NUMERIC
+    		</when>
+    		<when test="type == 'user'">
+      			UPDATE TB_USER_ROLE_MAP
+      			SET ROLE_NO = 3
+      			WHERE USER_NO = #{userNo}::NUMERIC
+    		</when>
+  		</choose>
+	</update>
+	<select id="selectUserDetail" resultType="com.learn.forwiz.admin.user.vo.AdminUserVO">
+	   /*selectUserDetail*/
+	   SELECT 
+		     A.USER_NO,
+		     A.USER_NM,
+		     A.EMAIL,
+		     A.CONTACT,
+		     A.REGIST_DT,
+		     C.ROLE_NAME,
+		     D.ORDER_DT,
+		     E.LECTURE_NO,
+		     E.ORDER_PRICE,
+		     E.ORDER_LECTURE_NM,
+		     G.FINISH_CNT,
+		     G.REVIEW_CONTENT,
+		     G.STAR_RATE,
+			 (SELECT COUNT(STAR_RATE) 		FROM TB_USER_LECTURE WHERE USER_NO = E.USER_NO) AS STAR_RATE_COUNT, 
+    		 (SELECT AVG(STAR_RATE) 		FROM TB_USER_LECTURE WHERE USER_NO = E.USER_NO) AS AVG_STAR_RATE,
+    		 (SELECT COUNT(REVIEW_CONTENT) 	FROM TB_USER_LECTURE WHERE USER_NO = E.USER_NO) AS REVIEW_CONTENT_COUNT,
+    		 (SELECT COUNT(*) 				FROM TB_USER_LECTURE WHERE USER_NO = E.USER_NO) AS LECTURE_COUNT
+		FROM TB_USER A
+		     LEFT JOIN TB_USER_ROLE_MAP B 	ON A.USER_NO 	= B.USER_NO
+		     LEFT JOIN TB_USER_ROLE C 		ON B.ROLE_NO 	= C.ROLE_NO
+		     LEFT JOIN TB_ORDER D 			ON A.USER_NO 	= D.USER_NO
+		     LEFT JOIN TB_ORDER_DETAIL E 	ON D.USER_NO 	= E.USER_NO
+		     LEFT JOIN TB_LECTURE F 		ON E.LECTURE_NO = F.LECTURE_NO 
+		     LEFT JOIN TB_USER_LECTURE G 	ON A.USER_NO 	= G.USER_NO AND F.LECTURE_NO = G.LECTURE_NO
+		WHERE 1=1
+		  	AND A.USER_NO = #{userNo}::NUMERIC
+		GROUP BY 
+		    A.USER_NO, E.USER_NO, A.USER_NM, A.EMAIL, A.CONTACT, A.REGIST_DT, 
+		    C.ROLE_NAME, D.ORDER_DT, E.LECTURE_NO, E.ORDER_PRICE, 
+		    E.ORDER_LECTURE_NM, E.ORDER_NO, F.LECTURE_NO, 
+		    G.FINISH_CNT, G.REVIEW_CONTENT, G.STAR_RATE
+	</select>
+</mapper>
