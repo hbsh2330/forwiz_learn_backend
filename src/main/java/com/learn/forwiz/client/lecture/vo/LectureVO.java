@@ -23,8 +23,8 @@ public class LectureVO {
 	// 페이징
 	int totalRecordCnt;			/* 총결과개수   */
 	int page;					/* 현재페이지   */
-	int pageCnt = 5;			/* 페이징개수   */
-	int recordCnt = 12;			/* 레코드개수   */
+	int pageCnt;				/* 페이징개수   */
+	int recordCnt;				/* 레코드개수   */
 	
 	// 검색 파라미터
 	String[] difficultyArray;	/* 난이도배열   */
